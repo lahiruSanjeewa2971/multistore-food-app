@@ -4,6 +4,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ModalProvider } from "@/provider/modal-provider";
+import { ToastProvider } from "@/provider/toast-provider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -38,6 +39,7 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased ${poppins.className}`}
         >
           <ModalProvider />
+          <ToastProvider />
           {children}
         </body>
       </html>
