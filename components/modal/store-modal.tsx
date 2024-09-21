@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
 
 const formSchema = z.object({
   name: z
@@ -36,7 +37,17 @@ export const StoreModal = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log("Form values :", values);
+    // console.log("Form values :", values);
+    try {
+      setIsLoading(true);
+
+      const response = await axios.post("/api/stores", values);
+      console.log("submit | response :", response);
+    } catch (error) {
+      console.log("error :", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -70,8 +81,17 @@ export const StoreModal = () => {
 
               {/* space-x-2 = elements within the div has x axis space of 2 */}
               <div className="pt-6 space-x-2 flex items-center justify-end w-full">
-                <Button disabled={isLoading} type="button" variant={"outline"} size={'sm'}>Cancel</Button>
-                <Button disabled={isLoading} type="submit" size={'sm'}>Continue</Button>
+                <Button
+                  disabled={isLoading}
+                  type="button"
+                  variant={"outline"}
+                  size={"sm"}
+                >
+                  Cancel
+                </Button>
+                <Button disabled={isLoading} type="submit" size={"sm"}>
+                  Continue
+                </Button>
               </div>
             </form>
           </Form>
