@@ -1,3 +1,4 @@
+import Navbar from "@/components/navbar";
 import { db } from "@/firebase";
 import { Store } from "@/types-db";
 import { auth } from "@clerk/nextjs/server";
@@ -9,10 +10,7 @@ interface DashboardLayoutProps {
   params: { storeId: string };
 }
 
-const DashboardLayout = async ({
-  children,
-  params,
-}: DashboardLayoutProps) => {
+const DashboardLayout = async ({ children, params }: DashboardLayoutProps) => {
   const { userId } = auth();
 
   if (!userId) {
@@ -39,7 +37,7 @@ const DashboardLayout = async ({
 
   return (
     <>
-      This is the Navbar : {params.storeId}
+      <Navbar />
       {children}
     </>
   );
