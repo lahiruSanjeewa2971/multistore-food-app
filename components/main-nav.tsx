@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -13,6 +13,11 @@ export const MainNav = ({
   const params = useParams();
 
   const routes = [
+    {
+      href: `/${params.storeId}`,
+      label: "Overview",
+      active: pathname === `/${params.storeId}`,
+    },
     {
       href: `/${params.storeId}/settings`,
       label: "Settings",
