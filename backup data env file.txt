@@ -1,0 +1,13 @@
+Building a Next.js Multistore Food App: Tutorial with TypeScript, Clerk Authentication, and Firebase
+
+authentication : https://dashboard.clerk.com/apps/app_2mE2X6Nh1Y8GMqiEyDbskrUgQq7/instances/ins_2mE2X6KmDUCrEcNHO1k46F5SBsn
+project name in there : multi-store-admin-portal
+
+->npm install @clerk/nextjs
+
+create .env 
+add into .env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_c3VwZXItbWFja2VyZWwtMC5jbGVyay5hY2NvdW50cy5kZXYk
+CLERK_SECRET_KEY=sk_test_PQqxC7esjfvkQS3l15o8WiuEVYTSiOxcW3iN4LrWGC
+
+

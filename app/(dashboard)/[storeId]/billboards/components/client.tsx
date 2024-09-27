@@ -2,11 +2,17 @@
 
 import { Heading } from "@/components/heading";
 import { Button } from "@/components/ui/button";
+import { DataTable } from "@/components/ui/data-table";
 import { Separator } from "@/components/ui/separator";
 import { Plus } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
+import { BillboardColums, columns } from "./columns";
 
-export const BillboardClient = () => {
+interface BillboardClientProps {
+  data: BillboardColums[];
+}
+
+export const BillboardClient = ({data} : BillboardClientProps) => {
   const params = useParams();
   const router = useRouter();
 
@@ -25,6 +31,8 @@ export const BillboardClient = () => {
       </div>
 
       <Separator/>
+
+      <DataTable columns={columns} data={data } />
     </>
   );
 };
