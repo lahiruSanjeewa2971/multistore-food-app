@@ -20,7 +20,7 @@ export const BillboardClient = ({data} : BillboardClientProps) => {
     <>
       <div className="flex items-center justify-center">
         <Heading
-          title={`Billboards (0)`}
+          title={`Billboards (${data.length})`}
           description="Manage billboards for your store."
         />
 
@@ -32,7 +32,7 @@ export const BillboardClient = ({data} : BillboardClientProps) => {
 
       <Separator/>
 
-      <DataTable columns={columns} data={data } />
+      <DataTable searchKey="label" columns={columns} data={data } />
     </>
   );
 };

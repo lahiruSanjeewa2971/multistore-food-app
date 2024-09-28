@@ -71,12 +71,12 @@ export const BillboardForm = ({ initialData }: BillboardFormProps) => {
       }
 
       toast.success(toastMessage);
-      router.refresh();
       router.push(`/${params.storeId}/billboards`);
     } catch (error) {
       console.log("error :", error);
       toast.error("Something went wrong.");
     } finally {
+      router.refresh();
       setIsLoading(false);
     }
   };
