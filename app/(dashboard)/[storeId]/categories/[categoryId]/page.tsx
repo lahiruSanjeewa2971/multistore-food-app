@@ -18,11 +18,13 @@ const CategoryPage = async ({
     await getDocs(collection(doc(db, "stores", params.storeId), "billboards"))
   ).docs.map((doc) => doc.data()) as Billboard[];
 
-//   console.log('billboardsData', billboardsData)
+  //   console.log('billboardsData', billboardsData)
 
   return (
     <div className="flex-col">
-      <CategoryForm initialData={category} billboards={billboardsData} />
+      <div className="flex-1 space-y-4 p-8 pt-6">
+        <CategoryForm initialData={category} billboards={billboardsData} />
+      </div>
     </div>
   );
 };
