@@ -74,7 +74,10 @@ export const CategoryForm = ({
       if (initialData) {
         await axios.patch(
           `/api/stores/${params.storeId}/categories/${params.categoryId}`,
-          data
+          {
+            ...data,
+            billboardLabel: matchingBillBoard?.label,
+          }
         );
       } else {
         await axios.post(`/api/stores/${params.storeId}/categories`, {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
-import { CategoryColums } from "./columns";
+// import { CategoryColums } from "../[categoryId]/components/columns";
 import { useState } from "react";
 import {
   DropdownMenu,
@@ -16,9 +16,10 @@ import { Copy, Edit, MoreVertical, Trash } from "lucide-react";
 import toast from "react-hot-toast";;
 import axios from "axios";
 import { AlertModal } from "@/components/modal/alert-modal";
+import { CategoryColumns } from "./columns";
 
 interface CellActionProps {
-  data: CategoryColums;
+  data: CategoryColumns;
 }
 
 export const CellAction = ({ data }: CellActionProps) => {
@@ -40,7 +41,8 @@ export const CellAction = ({ data }: CellActionProps) => {
         `/api/stores/${params.storeId}/categories/${data.id}`
       );
       toast.success("Category removed");
-      router.refresh();
+      // router.refresh(); // sometimes this not refreshing the page
+      location.reload();
       router.push(`/${params.storeId}/categories`);
     } catch (error) {
       console.log("error :", error);
