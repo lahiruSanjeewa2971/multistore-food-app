@@ -8,12 +8,13 @@ import { useParams, useRouter } from "next/navigation";
 import React from "react";
 import { CategoryColumns, columns } from "./columns";
 import { DataTable } from "@/components/ui/data-table";
+import ApiList from "@/components/api-list";
 
 interface CategoryClientProps {
   data: CategoryColumns[];
 }
 
-export const CategoryClient = ({data} : CategoryClientProps) => {
+export const CategoryClient = ({ data }: CategoryClientProps) => {
   const params = useParams();
   const router = useRouter();
 
@@ -21,7 +22,7 @@ export const CategoryClient = ({data} : CategoryClientProps) => {
     <>
       <div className="flex items-center justify-center">
         <Heading
-          title="Categories (0)"
+          title={`Categories (${data.length})`}
           description="Manage categories for your site"
         />
 
@@ -36,6 +37,11 @@ export const CategoryClient = ({data} : CategoryClientProps) => {
       <Separator />
 
       <DataTable searchKey="name" columns={columns} data={data} />
+
+      <Heading title="API" description="API calls for categories" />
+      <Separator />
+
+      <ApiList entityName="categories" entityNameId="categoryId" />
     </>
   );
 };
