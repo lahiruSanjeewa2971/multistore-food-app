@@ -1,7 +1,7 @@
 import { db } from "@/firebase";
 import { Kitchen, Size } from "@/types-db";
 import { doc, getDoc } from "firebase/firestore";
-import { SizeForm } from "./components/sizes-form";
+import { KitchenForm } from "./components/kitchens-form";
 
 const KitchenPage = async ({
   params,
@@ -17,7 +17,7 @@ const KitchenPage = async ({
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
-        <SizeForm initialData={kitchen} />
+        <KitchenForm initialData={kitchen} />
       </div>
     </div>
   );

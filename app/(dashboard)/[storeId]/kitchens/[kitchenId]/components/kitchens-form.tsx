@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { Size } from "@/types-db";
+import { Kitchen, Size } from "@/types-db";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { Trash } from "lucide-react";
@@ -23,8 +23,8 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
 
-interface SizeFormProps {
-  initialData: Size;
+interface KitchenFormProps {
+  initialData: Kitchen;
 }
 
 // console.log('data :', billboards)
@@ -33,16 +33,16 @@ const formSchema = z.object({
   value: z.string().min(1),
 });
 
-export const SizeForm = ({ initialData }: SizeFormProps) => {
+export const KitchenForm = ({ initialData }: KitchenFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const params = useParams();
   const router = useRouter();
 
-  const title = initialData ? "Edit Size." : "Create a Size.";
-  const description = initialData ? "Edit a Size." : "Add a new Size.";
-  const toastMessage = initialData ? "Size updated." : "Size created.";
-  const action = initialData ? "Save Changes." : "Create Size.";
+  const title = initialData ? "Edit Kitchen." : "Create a Kitchen.";
+  const description = initialData ? "Edit a Kitchen." : "Add a new Kitchen.";
+  const toastMessage = initialData ? "Kitchen updated." : "Kitchen created.";
+  const action = initialData ? "Save Changes." : "Create Kitchen.";
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -56,15 +56,15 @@ export const SizeForm = ({ initialData }: SizeFormProps) => {
 
       if (initialData) {
         await axios.patch(
-          `/api/stores/${params.storeId}/sizes/${params.sizeId}`,
+          `/api/stores/${params.storeId}/kitchens/${params.kitchenId}`,
           data
         );
       } else {
-        await axios.post(`/api/stores/${params.storeId}/sizes`, data);
+        await axios.post(`/api/stores/${params.storeId}/kitchens`, data);
       }
 
       toast.success(toastMessage);
-      router.push(`/${params.storeId}/sizes`);
+      router.push(`/${params.storeId}/kitchens`);
     } catch (error) {
       console.log("error :", error);
       toast.error("Something went wrong.");
@@ -78,11 +78,11 @@ export const SizeForm = ({ initialData }: SizeFormProps) => {
     try {
       setIsLoading(true);
       await axios.delete(
-        `/api/stores/${params.storeId}/sizes/${params.sizeId}`
+        `/api/stores/${params.storeId}/kitchens/${params.kitchenId}`
       );
-      toast.success("size removed");
+      toast.success("Kitchen removed");
       router.refresh();
-      router.push(`/${params.storeId}/sizes`);
+      router.push(`/${params.storeId}/kitchens`);
     } catch (error) {
       console.log("error :", error);
       toast.error("Something went wrong.");
@@ -132,7 +132,7 @@ export const SizeForm = ({ initialData }: SizeFormProps) => {
                   <FormControl>
                     <Input
                       disabled={isLoading}
-                      placeholder="Your size name..."
+                      placeholder="Your kitchen name..."
                       {...field}
                     />
                   </FormControl>
@@ -150,7 +150,7 @@ export const SizeForm = ({ initialData }: SizeFormProps) => {
                   <FormControl>
                     <Input
                       disabled={isLoading}
-                      placeholder="Your size value..."
+                      placeholder="Kitchen value..."
                       {...field}
                     />
                   </FormControl>
