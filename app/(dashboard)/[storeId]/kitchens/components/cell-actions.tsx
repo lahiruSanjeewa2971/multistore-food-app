@@ -16,10 +16,10 @@ import { Copy, Edit, MoreVertical, Trash } from "lucide-react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { AlertModal } from "@/components/modal/alert-modal";
-import { SizesColumns } from "./columns";
+import { KitchensColumns } from "./columns";
 
 interface CellActionProps {
-  data: SizesColumns;
+  data: KitchensColumns;
 }
 
 export const CellAction = ({ data }: CellActionProps) => {
@@ -31,18 +31,18 @@ export const CellAction = ({ data }: CellActionProps) => {
 
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
-    toast.success("Size id copied to clipboard.");
+    toast.success("Kitchen id copied to clipboard.");
   };
 
   const onDelete = async () => {
     try {
       setIsLoading(true);
       await axios.delete(
-        `/api/stores/${params.storeId}/sizes/${data.id}`
+        `/api/stores/${params.storeId}/kitchens/${data.id}`
       );
-      toast.success("size removed");
+      toast.success("Kitchen removed");
       location.reload();
-      router.push(`/${params.storeId}/sizes`);
+      router.push(`/${params.storeId}/kitchens`);
     } catch (error) {
       console.log("error :", error);
       toast.error("Something went wrong.");
@@ -75,7 +75,7 @@ export const CellAction = ({ data }: CellActionProps) => {
           </DropdownMenuItem>
 
           <DropdownMenuItem
-            onClick={() => router.push(`/${params.storeId}/sizes/${data.id}`)}
+            onClick={() => router.push(`/${params.storeId}/kitchens/${data.id}`)}
           >
             <Edit className="h-4 w-4 mr-2" />
             Update
