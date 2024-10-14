@@ -24,11 +24,6 @@ export const MainNav = ({
       active: pathname === `/${params.storeId}/billboards`,
     },
     {
-      href: `/${params.storeId}/settings`,
-      label: "Settings",
-      active: pathname === `/${params.storeId}/settings`,
-    },
-    {
       href: `/${params.storeId}/categories`,
       label: "Categories",
       active: pathname === `/${params.storeId}/categories`,
@@ -42,6 +37,16 @@ export const MainNav = ({
       href: `/${params.storeId}/kitchens`,
       label: "Kitchens",
       active: pathname === `/${params.storeId}/kitchens`,
+    },
+    {
+      href: `/${params.storeId}/cuisines`,
+      label: "Cuisines",
+      active: pathname === `/${params.storeId}/cuisines`,
+    },
+    {
+      href: `/${params.storeId}/settings`,
+      label: "Settings",
+      active: pathname === `/${params.storeId}/settings`,
     },
   ];
   return (
