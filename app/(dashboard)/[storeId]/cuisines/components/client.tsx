@@ -10,11 +10,11 @@ import { columns, CuisinesColumns } from "./columns";
 import { DataTable } from "@/components/ui/data-table";
 import ApiList from "@/components/api-list";
 
-interface KitchenClientProps {
+interface CuisineClientProps {
   data: CuisinesColumns[];
 }
 
-export const CuisinesClient = ({ data }: KitchenClientProps) => {
+export const CuisinesClient = ({ data }: CuisineClientProps) => {
   const params = useParams();
   const router = useRouter();
 
@@ -22,12 +22,12 @@ export const CuisinesClient = ({ data }: KitchenClientProps) => {
     <>
       <div className="flex items-center justify-center">
         <Heading
-          title={`Kitchens (${data.length})`}
-          description="Manage kitchens for your site"
+          title={`Cuisines (${data.length})`}
+          description="Manage cuisines for your site"
         />
 
         <Button
-          onClick={() => router.push(`/${params.storeId}/kitchens/create`)}
+          onClick={() => router.push(`/${params.storeId}/cuisines/create`)}
         >
           <Plus className="h-4 w-4 mr-2" />
           Add New
@@ -38,10 +38,10 @@ export const CuisinesClient = ({ data }: KitchenClientProps) => {
 
       <DataTable searchKey="name" columns={columns} data={data} />
 
-      <Heading title="API" description="API calls for kitchens" />
+      <Heading title="API" description="API calls for cuisines" />
       <Separator />
 
-      <ApiList entityName="kitchens" entityNameId="kitchenId" />
+      <ApiList entityName="cuisines" entityNameId="cuisineId" />
     </>
   );
 };
