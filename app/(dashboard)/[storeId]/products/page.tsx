@@ -4,6 +4,7 @@ import { collection, doc, getDocs } from "firebase/firestore";
 import { format } from "date-fns";
 import { SizesClient } from "./components/client";
 import { ProductColumns } from "./components/columns";
+import { formatter } from "@/lib/utils";
 
 const ProductsPage = async ({ params }: { params: { storeId: string } }) => {
   const productData = (
@@ -13,7 +14,8 @@ const ProductsPage = async ({ params }: { params: { storeId: string } }) => {
   const formattedProducts: ProductColumns[] = productData.map((item) => ({
     id: item.id,
     name: item.name,
-    price: item.price,
+    // price: item.price,
+    price: formatter.format(item.price),
     isArchived: item.isArchived,
     isFeatured: item.isFeatured,
     category: item.category,
