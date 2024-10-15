@@ -1,9 +1,9 @@
 import { db } from "@/firebase";
 import { Cuisine, Kitchen } from "@/types-db";
 import { collection, doc, getDocs } from "firebase/firestore";
-import { CuisinesClient } from "./components/client";
-import { CuisinesColumns } from "./components/columns";
 import { format } from "date-fns";
+import { CuisinesColumns } from "./components/columns";
+import { CuisinesClient } from "./components/client";
 
 const CuisinesPage = async ({ params }: { params: { storeId: string } }) => {
   const cuisineData = (
