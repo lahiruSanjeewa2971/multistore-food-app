@@ -6,15 +6,15 @@ import { Separator } from "@/components/ui/separator";
 import { Plus } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import React from "react";
-import { columns, KitchensColumns } from "./columns";
+import { columns, ProductColumns } from "./columns";
 import { DataTable } from "@/components/ui/data-table";
 import ApiList from "@/components/api-list";
 
-interface KitchenClientProps {
-  data: KitchensColumns[];
+interface ProductsClientProps {
+  data: ProductColumns[];
 }
 
-export const KitchensClient = ({ data }: KitchenClientProps) => {
+export const ProductsClient = ({ data }: ProductsClientProps) => {
   const params = useParams();
   const router = useRouter();
 
@@ -22,12 +22,12 @@ export const KitchensClient = ({ data }: KitchenClientProps) => {
     <>
       <div className="flex items-center justify-center">
         <Heading
-          title={`Kitchens (${data.length})`}
-          description="Manage kitchens for your site"
+          title={`Products (${data.length})`}
+          description="Manage products for your site"
         />
 
         <Button
-          onClick={() => router.push(`/${params.storeId}/kitchens/create`)}
+          onClick={() => router.push(`/${params.storeId}/products/create`)}
         >
           <Plus className="h-4 w-4 mr-2" />
           Add New
@@ -38,7 +38,7 @@ export const KitchensClient = ({ data }: KitchenClientProps) => {
 
       <DataTable searchKey="name" columns={columns} data={data} />
 
-      <Heading title="API" description="API calls for kitchens" />
+      <Heading title="API" description="API calls for products" />
       <Separator />
 
       <ApiList entityName="products" entityNameId="productId" />
