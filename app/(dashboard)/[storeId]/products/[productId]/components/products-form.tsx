@@ -1,6 +1,7 @@
 "use client";
 
 import { Heading } from "@/components/heading";
+import ImagesUpload from "@/components/images-upload";
 import { AlertModal } from "@/components/modal/alert-modal";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -72,7 +73,17 @@ export const ProductForm = ({
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData,
+    defaultValues: {
+      name: "",
+      price: 0,
+      images: [],
+      isArchived: false,
+      isFeatured: false,
+      category: "",
+      cuisine: "",
+      kitchen: "",
+      size: "",
+    },
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
@@ -147,6 +158,30 @@ export const ProductForm = ({
           onSubmit={form.handleSubmit(onSubmit)}
           className="w-full space-y-8"
         >
+          {/* Image uploader */}
+          <FormField
+            control={form.control}
+            name="images"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Product Image</FormLabel>
+                <FormControl>
+                  <ImagesUpload
+                    value={field.value.map((image) => image.url)}
+                    onChange={(urls) => {
+                      field.onChange(urls.map((url) => ({ url })));
+                    }}
+                    onRemove={(url) =>
+                      field.onChange(
+                        field.value.filter((current) => current.url !== url)
+                      )
+                    }
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
           <div className="grid grid-cols-3 gap-8">
             <FormField
               control={form.control}
