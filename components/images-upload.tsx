@@ -45,18 +45,45 @@ const ImagesUpload = ({
     // Array to store newly uploaded urls
     let newUrls: string[] = [];
     // counter to keep track the uploaded images
-    let counterUploads = 0;
+    let completedUploads = 0;
 
     files.forEach((file: File) => {
       const uploadTask = uploadBytesResumable(
-        ref(storage, `Images/${Date.now()} - ${file.name}`),
+        ref(storage, `Images/Products/${Date.now()} - ${file.name}`),
         file,
         { contentType: file.type }
+      );
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        },
+        (error) => {
+          toast.error(error.message);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadurl) => {
+            // store the newly uploaded url
+            newUrls.push(downloadurl);
+            // increment the completed uploads
+            completedUploads++;
+            // combine all the new urls with the existing urls
+            onChange([...value, ...newUrls]);
+          });
+        }
       );
     });
   };
 
-  const onDelete = async (url: string) => {};
+  const onDelete = async (url: string) => {
+    const newValue = value.filter((imageUrl) => imageUrl !== url);
+    onRemove(url);
+    onChange(newValue);
+    deleteObject(ref(storage, url)).then(() => {
+      toast.success("Image removed.");
+    });
+  };
 
   return (
     <div>
@@ -100,7 +127,7 @@ const ImagesUpload = ({
               <label>
                 <div className="flex flex-col gap-2 items-center justify-center w-full h-full cursor-pointer">
                   <ImagePlus className="h-4 w-4" />
-                  <p>Upload an image</p>
+                  <p>Upload images</p>
                 </div>
                 <input
                   type="file"
